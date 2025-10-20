@@ -1,43 +1,32 @@
 import React, { useState } from 'react';
 import {
-  Box,
   Container,
   Paper,
+  Box,
+  Typography,
   TextField,
   Button,
-  Typography,
-  Link,
-  Alert,
-  InputAdornment,
-  IconButton,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
-  Divider,
-  Stack,
-  CircularProgress
+  Link,
+  Alert,
+  CircularProgress,
+  Divider
 } from '@mui/material';
-import {
-  Visibility,
-  VisibilityOff,
-  Email as EmailIcon,
-  Lock as LockIcon,
-  Person as PersonIcon
-} from '@mui/icons-material';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useSnackbar } from 'notistack';
+import { Link as RouterLink, useNavigate, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { useSnackbar } from 'notistack';
 import { useAuth } from '../../contexts/AuthContext';
 
-// Schema de validação
-const schema = yup.object().shape({
+const schema = yup.object({
   email: yup
     .string()
-    .email('Email inválido')
+    .email('Digite um email válido')
     .required('Email é obrigatório'),
   password: yup
     .string()
@@ -45,8 +34,8 @@ const schema = yup.object().shape({
     .required('Senha é obrigatória'),
   userType: yup
     .string()
-    .oneOf(['candidate', 'company', 'admin'], 'Tipo de utilizador inválido')
-    .required('Selecione o tipo de utilizador')
+    .oneOf(['candidate', 'company', 'admin'], 'Tipo de usuário inválido')
+    .required('Tipo de usuário é obrigatório')
 });
 
 function LoginPage() {
@@ -54,18 +43,15 @@ function LoginPage() {
   const location = useLocation();
   const { enqueueSnackbar } = useSnackbar();
   const { login } = useAuth();
-  
-  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  
-  // URL de redirecionamento após login
+  const [error, setError] = useState('');
+
   const from = location.state?.from?.pathname || '/';
 
   const {
     control,
     handleSubmit,
-    formState: { errors },
-    setError
+    formState: { errors }
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -77,44 +63,20 @@ function LoginPage() {
 
   const onSubmit = async (data) => {
     setIsLoading(true);
-    
+    setError('');
+
     try {
       const result = await login(data.email, data.password, data.userType);
       
       if (result.success) {
         enqueueSnackbar('Login realizado com sucesso!', { variant: 'success' });
-        
-        // Redirecionar baseado no tipo de utilizador
-        let redirectPath = from;
-        if (from === '/') {
-          switch (data.userType) {
-            case 'candidate':
-              redirectPath = '/candidate/dashboard';
-              break;
-            case 'company':
-              redirectPath = '/company/dashboard';
-              break;
-            case 'admin':
-              redirectPath = '/admin/dashboard';
-              break;
-            default:
-              redirectPath = '/';
-          }
-        }
-        
-        navigate(redirectPath, { replace: true });
+        navigate(from, { replace: true });
       } else {
-        setError('root', {
-          type: 'manual',
-          message: result.message || 'Erro no login. Verifique suas credenciais.'
-        });
+        setError(result.message || 'Erro no login');
       }
     } catch (error) {
+      setError('Erro interno do sistema');
       console.error('Erro no login:', error);
-      setError('root', {
-        type: 'manual',
-        message: 'Erro interno. Tente novamente mais tarde.'
-      });
     } finally {
       setIsLoading(false);
     }
@@ -123,237 +85,122 @@ function LoginPage() {
   return (
     <>
       <Helmet>
-        <title>Login - Plataforma de Empregos Moçambique</title>
-        <meta name="description" content="Faça login na sua conta da Plataforma de Empregos de Moçambique" />
+        <title>Entrar - Plataforma de Empregos Moçambique</title>
+        <meta name="description" content="Acesse sua conta na maior plataforma de empregos de Moçambique" />
       </Helmet>
 
-      <Box
-        sx={{
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)'
-        }}
-      >
-        <Container maxWidth="sm">
-          <Paper 
-            elevation={10}
-            sx={{
-              p: { xs: 3, sm: 6 },
-              borderRadius: 3,
-              background: 'rgba(255,255,255,0.95)',
-              backdropFilter: 'blur(10px)'
-            }}
-          >
-            {/* Header */}
-            <Box sx={{ textAlign: 'center', mb: 4 }}>
-              <Typography 
-                variant="h4" 
-                component="h1" 
-                fontWeight="bold" 
-                color="primary" 
-                gutterBottom
-              >
-                🇲🇿 Emprego MZ
-              </Typography>
-              <Typography variant="h5" fontWeight="600" gutterBottom>
-                Bem-vindo de volta
-              </Typography>
-              <Typography variant="body1" color="text.secondary">
-                Entre na sua conta para continuar
-              </Typography>
-            </Box>
+      <Container maxWidth="sm" sx={{ py: 4 }}>
+        <Paper elevation={3} sx={{ p: 4 }}>
+          <Box sx={{ textAlign: 'center', mb: 3 }}>
+            <Typography variant="h4" component="h1" gutterBottom fontWeight="bold" color="primary">
+              Bem-vindo de volta
+            </Typography>
+            <Typography variant="body1" color="text.secondary">
+              Acesse sua conta para continuar
+            </Typography>
+          </Box>
 
-            {/* Formulário */}
-            <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-              {/* Erro geral */}
-              {errors.root && (
-                <Alert severity="error" sx={{ mb: 3 }}>
-                  {errors.root.message}
-                </Alert>
+          {error && (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          )}
+
+          <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+            <Controller
+              name="userType"
+              control={control}
+              render={({ field }) => (
+                <FormControl fullWidth margin="normal" error={!!errors.userType}>
+                  <InputLabel>Tipo de Conta</InputLabel>
+                  <Select {...field} label="Tipo de Conta">
+                    <MenuItem value="candidate">Candidato</MenuItem>
+                    <MenuItem value="company">Empresa</MenuItem>
+                    <MenuItem value="admin">Administrador</MenuItem>
+                  </Select>
+                  {errors.userType && (
+                    <Typography variant="caption" color="error">
+                      {errors.userType.message}
+                    </Typography>
+                  )}
+                </FormControl>
               )}
+            />
 
-              <Stack spacing={3}>
-                {/* Tipo de Utilizador */}
-                <Controller
-                  name="userType"
-                  control={control}
-                  render={({ field }) => (
-                    <FormControl fullWidth error={!!errors.userType}>
-                      <InputLabel id="userType-label">
-                        Tipo de Utilizador
-                      </InputLabel>
-                      <Select
-                        {...field}
-                        labelId="userType-label"
-                        label="Tipo de Utilizador"
-                        startAdornment={
-                          <InputAdornment position="start">
-                            <PersonIcon color={errors.userType ? 'error' : 'action'} />
-                          </InputAdornment>
-                        }
-                      >
-                        <MenuItem value="candidate">Candidato</MenuItem>
-                        <MenuItem value="company">Empresa</MenuItem>
-                        <MenuItem value="admin">Administrador</MenuItem>
-                      </Select>
-                      {errors.userType && (
-                        <Typography variant="caption" color="error" sx={{ mt: 0.5, ml: 2 }}>
-                          {errors.userType.message}
-                        </Typography>
-                      )}
-                    </FormControl>
-                  )}
-                />
-
-                {/* Email */}
-                <Controller
-                  name="email"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      fullWidth
-                      label="Email"
-                      type="email"
-                      error={!!errors.email}
-                      helperText={errors.email?.message}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <EmailIcon color={errors.email ? 'error' : 'action'} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                  )}
-                />
-
-                {/* Senha */}
-                <Controller
-                  name="password"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      fullWidth
-                      label="Senha"
-                      type={showPassword ? 'text' : 'password'}
-                      error={!!errors.password}
-                      helperText={errors.password?.message}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <LockIcon color={errors.password ? 'error' : 'action'} />
-                          </InputAdornment>
-                        ),
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton
-                              onClick={() => setShowPassword(!showPassword)}
-                              edge="end"
-                              aria-label="toggle password visibility"
-                            >
-                              {showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                  )}
-                />
-
-                {/* Botão de Login */}
-                <Button
-                  type="submit"
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
                   fullWidth
-                  variant="contained"
-                  size="large"
-                  disabled={isLoading}
-                  sx={{ 
-                    mt: 3, 
-                    py: 1.5,
-                    fontSize: '1.1rem',
-                    fontWeight: 600
-                  }}
-                >
-                  {isLoading ? (
-                    <>
-                      <CircularProgress size={20} sx={{ mr: 1 }} />
-                      Entrando...
-                    </>
-                  ) : (
-                    'Entrar'
-                  )}
-                </Button>
+                  label="Email"
+                  type="email"
+                  margin="normal"
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
+                  autoComplete="email"
+                />
+              )}
+            />
 
-                {/* Link para recuperar senha */}
-                <Box sx={{ textAlign: 'center' }}>
-                  <Link
-                    component="button"
-                    type="button"
-                    variant="body2"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigate('/forgot-password');
-                    }}
-                    sx={{ 
-                      textDecoration: 'none',
-                      '&:hover': { textDecoration: 'underline' }
-                    }}
-                  >
-                    Esqueceu a senha?
-                  </Link>
+            <Controller
+              name="password"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  fullWidth
+                  label="Senha"
+                  type="password"
+                  margin="normal"
+                  error={!!errors.password}
+                  helperText={errors.password?.message}
+                  autoComplete="current-password"
+                />
+              )}
+            />
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              size="large"
+              disabled={isLoading}
+              sx={{ mt: 3, mb: 2, py: 1.5 }}
+            >
+              {isLoading ? (
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <CircularProgress size={20} color="inherit" />
+                  Entrando...
                 </Box>
-              </Stack>
-            </Box>
+              ) : (
+                'Entrar'
+              )}
+            </Button>
 
-            <Divider sx={{ my: 4 }}>
-              <Typography variant="body2" color="text.secondary">
-                ou
-              </Typography>
-            </Divider>
-
-            {/* Links para registo */}
             <Box sx={{ textAlign: 'center' }}>
-              <Typography variant="body2" color="text.secondary" gutterBottom>
-                Não tem uma conta?
-              </Typography>
-              <Stack 
-                direction={{ xs: 'column', sm: 'row' }} 
-                spacing={2} 
-                justifyContent="center"
-                sx={{ mt: 2 }}
+              <Link
+                component={RouterLink}
+                to="/forgot-password"
+                variant="body2"
+                sx={{ mb: 2, display: 'block' }}
               >
-                <Button 
-                  variant="outlined" 
-                  onClick={() => navigate('/register?type=candidate')}
-                  sx={{ minWidth: 140 }}
-                >
-                  Sou Candidato
-                </Button>
-                <Button 
-                  variant="outlined" 
-                  onClick={() => navigate('/register?type=company')}
-                  sx={{ minWidth: 140 }}
-                >
-                  Sou Empresa
-                </Button>
-              </Stack>
-            </Box>
-          </Paper>
+                Esqueceu sua senha?
+              </Link>
 
-          {/* Footer */}
-          <Typography 
-            variant="body2" 
-            color="text.secondary" 
-            align="center" 
-            sx={{ mt: 4 }}
-          >
-            © 2025 Plataforma de Empregos Moçambique. Todos os direitos reservados.
-          </Typography>
-        </Container>
-      </Box>
+              <Divider sx={{ my: 2 }} />
+
+              <Typography variant="body2" color="text.secondary">
+                Não tem uma conta?{' '}
+                <Link component={RouterLink} to="/register" variant="body2" fontWeight="bold">
+                  Registre-se aqui
+                </Link>
+              </Typography>
+            </Box>
+          </Box>
+        </Paper>
+      </Container>
     </>
   );
 }
