@@ -69,6 +69,9 @@ $cidades = [
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- Modern Enhancements CSS -->
+    <link rel="stylesheet" href="assets/css/modern-enhancements.css">
+
     <style>
         /* ========================================
            🎨 RESET & BASE STYLES
@@ -1305,6 +1308,10 @@ $cidades = [
     <!-- ========================================
          ✨ SCRIPTS
     ======================================== -->
+    
+    <!-- Modern Features JavaScript -->
+    <script src="assets/js/modern-features.js"></script>
+    
     <script>
         // Inicializar ícones Lucide
         lucide.createIcons();
@@ -1331,6 +1338,13 @@ $cidades = [
                 }
             });
         });
+
+        // Mostrar notificação de boas-vindas
+        setTimeout(() => {
+            <?php if (isset($_SESSION['user_id'])): ?>
+                showToast('Bem-vindo de volta, <?php echo htmlspecialchars($_SESSION['nome'] ?? 'Usuário'); ?>! 👋', 'success');
+            <?php endif; ?>
+        }, 500);
     </script>
 </body>
 </html>

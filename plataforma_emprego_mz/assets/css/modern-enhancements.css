@@ -1,0 +1,1045 @@
+/* ============================================
+   ✨ EMPREGO MZ - MODERN ENHANCEMENTS
+   Design Moderno, Animações Suaves & Micro-interações
+   ============================================ */
+
+/* ============================================
+   🎨 VARIÁVEIS CSS CUSTOMIZADAS
+   ============================================ */
+:root {
+    /* Cores Modernas com Gradientes */
+    --primary-gradient: linear-gradient(135deg, #0088CC 0%, #006699 100%);
+    --secondary-gradient: linear-gradient(135deg, #FF8C00 0%, #E67E00 100%);
+    --success-gradient: linear-gradient(135deg, #28A745 0%, #20873A 100%);
+    --accent-gradient: linear-gradient(135deg, #FFE8CC 0%, #FFD8A8 100%);
+    
+    /* Sombras Elegantes */
+    --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-sm: 0 2px 8px rgba(0, 136, 204, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 136, 204, 0.12);
+    --shadow-lg: 0 8px 24px rgba(0, 136, 204, 0.16);
+    --shadow-xl: 0 12px 32px rgba(0, 136, 204, 0.20);
+    --shadow-hover: 0 16px 48px rgba(255, 140, 0, 0.25);
+    
+    /* Transições Suaves */
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Bordas Modernas */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+}
+
+/* ============================================
+   ✨ ANIMAÇÕES GLOBAIS
+   ============================================ */
+
+/* Fade In ao carregar página */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide Up */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scale In */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Shimmer Loading */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* Pulse */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+/* Shake */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Bounce */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Rotate */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================
+   🎯 CLASSES DE ANIMAÇÃO
+   ============================================ */
+
+.fade-in {
+    animation: fadeIn 0.6s var(--transition-base) both;
+}
+
+.slide-up {
+    animation: slideUp 0.6s var(--transition-base) both;
+}
+
+.scale-in {
+    animation: scaleIn 0.4s var(--transition-bounce) both;
+}
+
+/* Delays progressivos */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* ============================================
+   🔘 BOTÕES MODERNIZADOS
+   ============================================ */
+
+.btn,
+.btn-primary,
+.btn-secondary,
+.btn-search,
+.btn-candidatar,
+.btn-detalhes {
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-base);
+    isolation: isolate;
+}
+
+/* Efeito de onda ao clicar */
+.btn::before,
+.btn-primary::before,
+.btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: -1;
+}
+
+.btn:active::before,
+.btn-primary:active::before,
+.btn-secondary:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Gradiente nos botões primários */
+.btn-primary {
+    background: var(--primary-gradient);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px) scale(1.02);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.btn-secondary {
+    background: var(--secondary-gradient);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px) scale(1.02);
+}
+
+.btn-search {
+    background: var(--secondary-gradient);
+    transition: all var(--transition-base);
+}
+
+.btn-search:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-3px);
+}
+
+/* ============================================
+   💳 CARDS MODERNIZADOS
+   ============================================ */
+
+.vaga-card,
+.solucao-card,
+.categoria-card,
+.xima-card {
+    transition: all var(--transition-base);
+    border: 1px solid transparent;
+}
+
+.vaga-card:hover,
+.solucao-card:hover,
+.categoria-card:hover,
+.xima-card:hover {
+    border-color: rgba(0, 136, 204, 0.2);
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-8px);
+}
+
+/* Efeito de brilho sutil */
+.vaga-card::after,
+.solucao-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotateZ(60deg) translate(-5em, 7.5em);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+}
+
+.vaga-card:hover::after,
+.solucao-card:hover::after {
+    opacity: 1;
+    animation: shimmer 2s infinite;
+}
+
+/* ============================================
+   ❤️ BOTÃO FAVORITAR
+   ============================================ */
+
+.btn-favorite {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: white;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-favorite:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-favorite i {
+    color: #999;
+    transition: all var(--transition-base);
+}
+
+.btn-favorite.favorited i {
+    color: #FF6B6B;
+    animation: pulse 0.6s var(--transition-bounce);
+}
+
+.btn-favorite:active {
+    transform: scale(0.9);
+}
+
+/* Contador de favoritos */
+.favorite-count {
+    display: inline-block;
+    padding: 2px 8px;
+    background: #FFE8E8;
+    color: #FF6B6B;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 600;
+    margin-left: 8px;
+    animation: scaleIn 0.3s var(--transition-bounce);
+}
+
+/* ============================================
+   🎚️ SLIDER DE SALÁRIO MODERNO
+   ============================================ */
+
+.salary-slider-container {
+    padding: 20px 0;
+}
+
+.salary-slider {
+    position: relative;
+    height: 6px;
+    background: linear-gradient(to right, #E0E0E0, #0088CC);
+    border-radius: var(--radius-full);
+    margin: 30px 0;
+}
+
+.salary-slider input[type="range"] {
+    position: absolute;
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    pointer-events: none;
+    top: 0;
+}
+
+.salary-slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #0088CC;
+    cursor: pointer;
+    pointer-events: all;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-fast);
+}
+
+.salary-slider input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: var(--shadow-lg);
+}
+
+.salary-slider input[type="range"]::-webkit-slider-thumb:active {
+    transform: scale(1.1);
+}
+
+.salary-values {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0088CC;
+    margin-top: 10px;
+}
+
+/* ============================================
+   🔔 NOTIFICAÇÕES TOAST
+   ============================================ */
+
+.toast-container {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.toast {
+    min-width: 300px;
+    padding: 16px 20px;
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xl);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: slideIn 0.4s var(--transition-bounce);
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+}
+
+.toast.success::before {
+    background: #28A745;
+}
+
+.toast.error::before {
+    background: #DC3545;
+}
+
+.toast.info::before {
+    background: #0088CC;
+}
+
+.toast.warning::before {
+    background: #FF8C00;
+}
+
+.toast-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+}
+
+.toast.success .toast-icon {
+    color: #28A745;
+}
+
+.toast.error .toast-icon {
+    color: #DC3545;
+}
+
+.toast.info .toast-icon {
+    color: #0088CC;
+}
+
+.toast.warning .toast-icon {
+    color: #FF8C00;
+}
+
+.toast-content {
+    flex: 1;
+}
+
+.toast-title {
+    font-weight: 700;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.toast-message {
+    font-size: 13px;
+    color: #5A5A5A;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: #999;
+    transition: color var(--transition-fast);
+}
+
+.toast-close:hover {
+    color: #333;
+}
+
+/* Barra de progresso */
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: currentColor;
+    opacity: 0.3;
+    animation: progress 3s linear forwards;
+}
+
+@keyframes progress {
+    from { width: 100%; }
+    to { width: 0%; }
+}
+
+/* ============================================
+   🔍 AUTOCOMPLETE NA BUSCA
+   ============================================ */
+
+.search-autocomplete {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-xl);
+    margin-top: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    animation: slideUp 0.3s var(--transition-base);
+}
+
+.search-autocomplete.active {
+    display: block;
+}
+
+.autocomplete-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #F5F5F5;
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-item:hover {
+    background: #F5F5F5;
+    padding-left: 20px;
+}
+
+.autocomplete-icon {
+    color: #0088CC;
+    flex-shrink: 0;
+}
+
+.autocomplete-text {
+    flex: 1;
+}
+
+.autocomplete-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: #1A1A1A;
+}
+
+.autocomplete-subtitle {
+    font-size: 12px;
+    color: #999;
+}
+
+/* ============================================
+   🌓 MODO ESCURO/CLARO
+   ============================================ */
+
+.theme-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 56px;
+    height: 56px;
+    background: var(--primary-gradient);
+    border: none;
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-xl);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all var(--transition-base);
+    z-index: 1000;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1) rotate(180deg);
+    box-shadow: var(--shadow-hover);
+}
+
+.theme-toggle i {
+    transition: transform var(--transition-base);
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    --cor-fundo: #1A1A1A;
+    --cor-branco: #2A2A2A;
+    --cor-texto: #E0E0E0;
+    --cor-texto-claro: #999;
+    --cor-borda: #3A3A3A;
+}
+
+body.dark-mode .vaga-card,
+body.dark-mode .filter-section,
+body.dark-mode .sidebar-section {
+    background: #2A2A2A;
+    border-color: #3A3A3A;
+}
+
+body.dark-mode .header {
+    background: #2A2A2A;
+    border-bottom-color: #3A3A3A;
+}
+
+/* ============================================
+   💀 SKELETON LOADING
+   ============================================ */
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        #F0F0F0 25%,
+        #E0E0E0 50%,
+        #F0F0F0 75%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+    border-radius: var(--radius-md);
+}
+
+.skeleton-card {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+}
+
+.skeleton-header {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.skeleton-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+}
+
+.skeleton-title {
+    height: 24px;
+    width: 70%;
+    margin-bottom: 8px;
+}
+
+.skeleton-subtitle {
+    height: 16px;
+    width: 40%;
+}
+
+.skeleton-text {
+    height: 16px;
+    margin-bottom: 8px;
+}
+
+.skeleton-text:last-child {
+    width: 60%;
+}
+
+.skeleton-button {
+    height: 40px;
+    width: 120px;
+    margin-top: 16px;
+}
+
+/* ============================================
+   📱 COMPARTILHAR VAGA - Modal Moderno
+   ============================================ */
+
+.share-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+}
+
+.share-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.share-content {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: var(--shadow-xl);
+    transform: scale(0.9);
+    transition: transform var(--transition-bounce);
+}
+
+.share-modal.active .share-content {
+    transform: scale(1);
+}
+
+.share-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.share-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1A1A1A;
+}
+
+.share-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+    transition: color var(--transition-fast);
+    padding: 4px;
+}
+
+.share-close:hover {
+    color: #333;
+}
+
+.share-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.share-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px;
+    background: #F5F5F5;
+    border: 2px solid transparent;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-decoration: none;
+    color: #1A1A1A;
+}
+
+.share-btn:hover {
+    background: white;
+    border-color: #0088CC;
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.share-btn i {
+    width: 32px;
+    height: 32px;
+    color: #0088CC;
+}
+
+.share-btn-label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Cores específicas por rede */
+.share-btn.whatsapp:hover {
+    border-color: #25D366;
+}
+
+.share-btn.whatsapp:hover i {
+    color: #25D366;
+}
+
+.share-btn.linkedin:hover {
+    border-color: #0077B5;
+}
+
+.share-btn.linkedin:hover i {
+    color: #0077B5;
+}
+
+.share-btn.facebook:hover {
+    border-color: #1877F2;
+}
+
+.share-btn.facebook:hover i {
+    color: #1877F2;
+}
+
+.share-btn.twitter:hover {
+    border-color: #1DA1F2;
+}
+
+.share-btn.twitter:hover i {
+    color: #1DA1F2;
+}
+
+.share-link-container {
+    display: flex;
+    gap: 8px;
+}
+
+.share-link-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #E0E0E0;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    background: #F5F5F5;
+}
+
+.share-copy-btn {
+    padding: 12px 24px;
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.share-copy-btn:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+
+.share-copy-btn.copied {
+    background: var(--success-gradient);
+}
+
+/* ============================================
+   🏷️ BADGES MODERNOS
+   ============================================ */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.badge-area {
+    background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+    color: #0088CC;
+}
+
+.badge-modalidade {
+    background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+    color: #FF8C00;
+}
+
+.badge-urgente {
+    background: linear-gradient(135deg, #FFEBEE, #FFCDD2);
+    color: #DC3545;
+    animation: pulse 2s infinite;
+}
+
+.badge-destaque {
+    background: var(--primary-gradient);
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+/* ============================================
+   ✨ EFEITOS DE HOVER AVANÇADOS
+   ============================================ */
+
+/* Underline animado */
+.animated-underline {
+    position: relative;
+}
+
+.animated-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-gradient);
+    transition: width var(--transition-base);
+}
+
+.animated-underline:hover::after {
+    width: 100%;
+}
+
+/* Glow effect */
+.glow-on-hover {
+    transition: all var(--transition-base);
+}
+
+.glow-on-hover:hover {
+    box-shadow: 0 0 20px rgba(0, 136, 204, 0.4),
+                0 0 40px rgba(0, 136, 204, 0.2);
+}
+
+/* ============================================
+   📱 RESPONSIVIDADE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .toast-container {
+        right: 10px;
+        left: 10px;
+    }
+    
+    .toast {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .share-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .theme-toggle {
+        bottom: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+    }
+}
+
+/* ============================================
+   ⚡ PERFORMANCE - Otimizações
+   ============================================ */
+
+/* Will-change para animações */
+.btn:hover,
+.vaga-card:hover,
+.categoria-card:hover {
+    will-change: transform, box-shadow;
+}
+
+/* Transições de GPU */
+.btn,
+.vaga-card,
+.categoria-card,
+.toast,
+.share-content {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Scroll suave */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ============================================
+   🎨 GRADIENTES DECORATIVOS
+   ============================================ */
+
+.gradient-text {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.gradient-border {
+    position: relative;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: var(--primary-gradient);
+    border-radius: inherit;
+    z-index: -1;
+}
+
+/* ============================================
+   ✅ ACESSIBILIDADE
+   ============================================ */
+
+/* Foco visível melhorado */
+*:focus-visible {
+    outline: 3px solid #FF8C00;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Reduzir movimento para usuários que preferem */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Alto contraste */
+@media (prefers-contrast: high) {
+    .btn,
+    .vaga-card,
+    .badge {
+        border: 2px solid currentColor;
+    }
+}
