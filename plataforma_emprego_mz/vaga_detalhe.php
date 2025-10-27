@@ -138,23 +138,21 @@ function traduzirTipoContrato($tipo) {
     $traducoes = [
         'tempo_inteiro' => 'Tempo Integral',
         'tempo_parcial' => 'Tempo Parcial',
-        'estagio' => 'Estágio',
-        'freelance' => 'Freelance'
-    ];
-    return $traducoes[$tipo] ?? $tipo;
-}
-?>
-
-
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
+        'estagio' =>    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars( $vaga['titulo']); ?> - <?php echo htmlspecialchars( $vaga['nome_empresa']); ?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Modern Enhancements CSS -->
+    <link rel="stylesheet" href="assets/css/modern-enhancements.css">
+    
+    <!-- Vaga Cards Enhanced CSS -->
+    <link rel="stylesheet" href="assets/css/vaga-cards-enhanced.css">
+
+    <style>.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
@@ -1100,21 +1098,46 @@ function traduzirTipoContrato($tipo) {
                             class="form-textarea"
                             placeholder="Conte um pouco sobre você e por que se interessa por esta vaga..."
                         ></textarea>
-                    </div>
+                       <!-- ========================================
+         ✨ SCRIPTS
+    ======================================== -->
+    
+    <!-- Modern Features JavaScript -->
+    <script src="assets/js/modern-features.js"></script>
+    
+    <script>
+        lucide.createIcons();
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn-cancelar" onclick="fecharModalCandidatura()">
-                            Cancelar
-                        </button>
-                        <button type="submit" name="candidatar" class="btn-enviar">
-                            Enviar Candidatura
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+        function copiarLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('Link copiado para a área de transferência!', 'success');
+            }).catch(() => {
+                showToast('Erro ao copiar link', 'error');
+            });
+        }
 
-        <script>
+        // Adicionar data-vaga-id aos cards para favoritos
+        document.addEventListener('DOMContentLoaded', function() {
+            const vagaId = <?php echo $vaga_id; ?>;
+            const mainCard = document.querySelector('.vaga-header');
+            if (mainCard && !mainCard.parentElement.classList.contains('vaga-card')) {
+                mainCard.parentElement.classList.add('vaga-card');
+                mainCard.parentElement.setAttribute('data-vaga-id', vagaId);
+            }
+
+            // Mostrar notificação de sucesso/erro se houver
+            <?php if ($sucesso): ?>
+                showToast('<?php echo addslashes($sucesso); ?>', 'success');
+            <?php endif; ?>
+            
+            <?php if ($erro): ?>
+                showToast('<?php echo addslashes($erro); ?>', 'error');
+            <?php endif; ?>
+        });
+    </script>
+</body>
+</html>    <script>
             function abrirModalCandidatura() {
                 document.getElementById('modalCandidatura').classList.add('active');
             }

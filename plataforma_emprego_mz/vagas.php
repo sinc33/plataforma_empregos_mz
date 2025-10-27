@@ -186,16 +186,21 @@ function traduzirModalidade($modalidade) {
 ?>
 
 <!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vagas de Emprego em Moçambique - Emprego MZ</title>
-
-    <!-- Google Fonts -->
+<h    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Modern Enhancements CSS -->
+    <link rel="stylesheet" href="assets/css/modern-enhancements.css">
+    
+    <!-- Vaga Cards Enhanced CSS -->
+    <link rel="stylesheet" href="assets/css/vaga-cards-enhanced.css">
+
+    <style>fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -1053,38 +1058,44 @@ function traduzirModalidade($modalidade) {
                             <a href="?<?php echo http_build_query(array_merge($_GET, ['pagina' => $i])); ?>" 
                                class="page-link <?php echo $i === $pagina_atual ? 'active' : ''; ?>">
                                 <?php echo $i; ?>
-                            </a>
-                        <?php endfor; ?>
-
-                        <?php if ($pagina_atual < $total_paginas): ?>
-                            <a href="?<?php echo http_build_query(array_merge($_GET, ['pagina' => $pagina_atual + 1])); ?>" class="page-link">
-                                Próxima
-                            </a>
-                        <?php endif; ?>
-                    </nav>
-                <?php endif; ?>
-
-            <?php else: ?>
-                <!-- Mensagem quando não há vagas -->
-                <div class="empty-state">
-                    <i data-lucide="search-x"></i>
-                    <h3>Nenhuma vaga encontrada</h3>
-                    <p>Tente ajustar os filtros ou limpar todos os filtros para ver mais resultados</p>
-                    <button onclick="limparFiltros()" class="btn-aplicar" style="margin: 0 auto; display: block;">
-                        Limpar filtros
-                    </button>
-                </div>
-            <?php endif; ?>
-
-        </main>
-
-    </div>
-
-    <!-- ========================================
+        <!-- ========================================
          ✨ SCRIPTS
     ======================================== -->
+    
+    <!-- Modern Features JavaScript -->
+    <script src="assets/js/modern-features.js"></script>
+    
     <script>
         // Inicializar ícones Lucide
+        lucide.createIcons();
+
+        // Limpar todos os filtros
+        function limparFiltros() {
+            window.location.href = 'vagas.php';
+        }
+
+        // Ordenar vagas
+        function ordenarVagas(ordem) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('ordem', ordem);
+            url.searchParams.set('pagina', '1');
+            window.location.href = url.toString();
+        }
+
+        // Compartilhar vaga (atualizado para usar modal)
+        function compartilharVaga(vagaId) {
+            const url = window.location.origin + '/plataforma_emprego_mz/vaga_detalhe.php?id=' + vagaId;
+            const title = 'Vaga de Emprego - Emprego MZ';
+            openShareModal(url, title);
+        }
+
+        // Mostrar toast com contagem de vagas
+        setTimeout(() => {
+            showToast('<?php echo $total_vagas; ?> vagas encontradas!', 'info', 2000);
+        }, 500);
+    </script>
+</body>
+</html>    // Inicializar ícones Lucide
         lucide.createIcons();
 
         // Limpar todos os filtros

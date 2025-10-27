@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo: Favoritos, Toast e Compartilhar</title>
+    
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS das Features -->
+    <link rel="stylesheet" href="assets/css/features-ui.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1A1A1A;
+            margin-bottom: 16px;
+            font-size: 36px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #5A5A5A;
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+        
+        .demo-section {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+        
+        .demo-section h2 {
+            color: #0088CC;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .demo-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .demo-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .demo-btn-primary {
+            background: #0088CC;
+            color: white;
+        }
+        
+        .demo-btn-primary:hover {
+            background: #006699;
+            transform: translateY(-2px);
+        }
+        
+        .demo-btn-secondary {
+            background: #FF8C00;
+            color: white;
+        }
+        
+        .demo-btn-secondary:hover {
+            background: #E67E00;
+            transform: translateY(-2px);
+        }
+        
+        .demo-btn-success {
+            background: #28A745;
+            color: white;
+        }
+        
+        .demo-btn-success:hover {
+            background: #20873A;
+            transform: translateY(-2px);
+        }
+        
+        .demo-btn-error {
+            background: #DC3545;
+            color: white;
+        }
+        
+        .demo-btn-error:hover {
+            background: #C82333;
+            transform: translateY(-2px);
+        }
+        
+        /* Card de exemplo */
+        .vaga-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .vaga-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
+        }
+        
+        .vaga-header {
+            margin-bottom: 16px;
+            position: relative;
+        }
+        
+        .vaga-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 8px;
+        }
+        
+        .vaga-empresa {
+            color: #0088CC;
+            font-weight: 600;
+        }
+        
+        .vaga-info {
+            color: #5A5A5A;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        
+        .vaga-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #E0E0E0;
+        }
+        
+        .btn-compartilhar {
+            padding: 10px 20px;
+            background: white;
+            border: 1px solid #0088CC;
+            color: #0088CC;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-compartilhar:hover {
+            background: #0088CC;
+            color: white;
+        }
+        
+        .code-block {
+            background: #1A1A1A;
+            color: #E8E8E8;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin-top: 16px;
+        }
+        
+        .info-box {
+            background: #E3F2FD;
+            border-left: 4px solid #0088CC;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .info-box strong {
+            color: #0088CC;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🎯 Demo: Features Completas</h1>
+        <p class="subtitle">Favoritos, Notificações Toast e Compartilhar</p>
+        
+        <!-- Seção 1: Notificações Toast -->
+        <div class="demo-section">
+            <h2>🔔 Notificações Toast</h2>
+            <p>Clique nos botões para ver as notificações aparecerem:</p>
+            
+            <div class="demo-buttons">
+                <button class="demo-btn demo-btn-success" onclick="showToast('Operação realizada com sucesso!', 'success')">
+                    ✅ Success Toast
+                </button>
+                <button class="demo-btn demo-btn-error" onclick="showToast('Ocorreu um erro ao processar', 'error')">
+                    ❌ Error Toast
+                </button>
+                <button class="demo-btn demo-btn-primary" onclick="showToast('Esta é uma informação importante', 'info')">
+                    ℹ️ Info Toast
+                </button>
+                <button class="demo-btn demo-btn-secondary" onclick="showToast('Atenção: Verifique os dados!', 'warning')">
+                    ⚠️ Warning Toast
+                </button>
+                <button class="demo-btn demo-btn-primary" onclick="showToast('Esta notificação desaparece em 5 segundos', 'info', 5000)">
+                    ⏱️ Toast 5 segundos
+                </button>
+            </div>
+            
+            <div class="code-block">
+// Usar a função global showToast()
+showToast('Mensagem aqui', 'success'); // 'success', 'error', 'info', 'warning'
+showToast('Mensagem', 'info', 5000); // Duração customizada (ms)
+            </div>
+            
+            <div class="info-box">
+                <strong>Características:</strong><br>
+                • Auto-dismiss em 3 segundos (configurável)<br>
+                • Botão de fechar manual<br>
+                • Barra de progresso animada<br>
+                • Empilhamento automático<br>
+                • Animação suave de entrada/saída
+            </div>
+        </div>
+        
+        <!-- Seção 2: Sistema de Favoritos -->
+        <div class="demo-section">
+            <h2>❤️ Sistema de Favoritos</h2>
+            <p>Passe o mouse nos cards e clique no coração:</p>
+            
+            <div class="vaga-card" data-vaga-id="1">
+                <div class="vaga-header">
+                    <div class="vaga-title">Desenvolvedor Full Stack</div>
+                    <div class="vaga-empresa">TechCorp Moçambique</div>
+                </div>
+                <div class="vaga-info">
+                    Oportunidade para desenvolvedor com experiência em PHP, Laravel e JavaScript. Salário competitivo e benefícios.
+                </div>
+                <div class="vaga-footer">
+                    <span>Publicada há 2 dias</span>
+                </div>
+            </div>
+            
+            <div class="vaga-card" data-vaga-id="2">
+                <div class="vaga-header">
+                    <div class="vaga-title">Designer UI/UX</div>
+                    <div class="vaga-empresa">Creative Studio</div>
+                </div>
+                <div class="vaga-info">
+                    Procuramos designer criativo para projetos web e mobile. Figma, Photoshop e conhecimento em front-end.
+                </div>
+                <div class="vaga-footer">
+                    <span>Publicada há 5 dias</span>
+                </div>
+            </div>
+            
+            <div class="vaga-card" data-vaga-id="3">
+                <div class="vaga-header">
+                    <div class="vaga-title">Gerente de Projetos</div>
+                    <div class="vaga-empresa">ProjectHub MZ</div>
+                </div>
+                <div class="vaga-info">
+                    Gerente experiente para coordenar projetos de TI. Certificação PMP desejável. Equipe remota.
+                </div>
+                <div class="vaga-footer">
+                    <span>Publicada há 1 dia</span>
+                </div>
+            </div>
+            
+            <div class="demo-buttons">
+                <button class="demo-btn demo-btn-primary" onclick="mostrarFavoritos()">
+                    📊 Ver Favoritos Salvos
+                </button>
+                <button class="demo-btn demo-btn-secondary" onclick="limparFavoritos()">
+                    🗑️ Limpar Todos
+                </button>
+            </div>
+            
+            <div class="code-block">
+// Sistema de favoritos é automático!
+// Basta ter .vaga-card com data-vaga-id ou link para vaga_detalhe.php?id=X
+
+// Verificar se está favoritado
+FavoritesSystem.isFavorited(vagaId);
+
+// Contar favoritos
+FavoritesSystem.count();
+
+// Carregar todos favoritos
+FavoritesSystem.loadFavorites();
+            </div>
+            
+            <div class="info-box">
+                <strong>Características:</strong><br>
+                • Salva no localStorage do navegador<br>
+                • Botão aparece no hover (sempre visível no mobile)<br>
+                • Animação de coração ao favoritar<br>
+                • Toast de confirmação<br>
+                • Funciona automaticamente sem modificar HTML
+            </div>
+        </div>
+        
+        <!-- Seção 3: Compartilhar -->
+        <div class="demo-section">
+            <h2>📱 Menu de Compartilhar</h2>
+            <p>Clique no botão de compartilhar:</p>
+            
+            <div class="vaga-card" data-vaga-id="demo">
+                <div class="vaga-header">
+                    <div class="vaga-title">Vaga de Exemplo</div>
+                    <div class="vaga-empresa">Empresa Demo</div>
+                </div>
+                <div class="vaga-info">
+                    Esta é uma vaga de demonstração para testar o sistema de compartilhamento.
+                </div>
+                <div class="vaga-footer">
+                    <span>Publicada hoje</span>
+                    <button class="btn-compartilhar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
+                        Compartilhar
+                    </button>
+                </div>
+            </div>
+            
+            <div class="code-block">
+// Sistema de compartilhar é automático!
+// Basta ter um botão com classe .btn-compartilhar dentro de .vaga-card
+
+// Menu com opções:
+// - WhatsApp
+// - LinkedIn
+// - Email
+// - Copiar Link
+            </div>
+            
+            <div class="info-box">
+                <strong>Características:</strong><br>
+                • Menu dropdown com 4 opções<br>
+                • WhatsApp, LinkedIn, Email e Copiar Link<br>
+                • Detecta URL automaticamente do card<br>
+                • Toast de confirmação ao copiar<br>
+                • Responsivo (mobile usa bottom sheet)
+            </div>
+        </div>
+        
+        <!-- Seção 4: Integração -->
+        <div class="demo-section">
+            <h2>🚀 Como Integrar</h2>
+            <p><strong>Passo 1:</strong> Adicione no <code>&lt;head&gt;</code> do seu arquivo PHP:</p>
+            
+            <div class="code-block">
+&lt;!-- CSS das Features --&gt;
+&lt;link rel="stylesheet" href="assets/css/features-ui.css"&gt;
+            </div>
+            
+            <p style="margin-top: 20px;"><strong>Passo 2:</strong> Adicione antes do <code>&lt;/body&gt;</code>:</p>
+            
+            <div class="code-block">
+&lt;!-- JavaScript das Features --&gt;
+&lt;script src="assets/js/features.js"&gt;&lt;/script&gt;
+            </div>
+            
+            <p style="margin-top: 20px;"><strong>Pronto!</strong> Todas as funcionalidades funcionam automaticamente:</p>
+            
+            <div class="info-box">
+                ✅ Favoritos funcionam em cards com <code>data-vaga-id</code> ou links para <code>vaga_detalhe.php?id=X</code><br>
+                ✅ Toast pode ser chamado de qualquer lugar com <code>showToast()</code><br>
+                ✅ Compartilhar funciona em botões com classe <code>.btn-compartilhar</code>
+            </div>
+        </div>
+        
+        <!-- Estatísticas -->
+        <div class="demo-section">
+            <h2>📊 Informações do Sistema</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <div style="background: #E3F2FD; padding: 20px; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 32px; font-weight: 700; color: #0088CC;" id="favCount">0</div>
+                    <div style="color: #5A5A5A;">Vagas Favoritadas</div>
+                </div>
+                <div style="background: #FFF3E0; padding: 20px; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 32px; font-weight: 700; color: #FF8C00;">3</div>
+                    <div style="color: #5A5A5A;">Cards de Demonstração</div>
+                </div>
+                <div style="background: #E8F5E9; padding: 20px; border-radius: 8px; text-align: center;">
+                    <div style="font-size: 32px; font-weight: 700; color: #28A745;">100%</div>
+                    <div style="color: #5A5A5A;">Funcional</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- JavaScript das Features -->
+    <script src="assets/js/features.js"></script>
+    
+    <script>
+        // Atualizar contador de favoritos
+        function atualizarContador() {
+            const count = FavoritesSystem.count();
+            document.getElementById('favCount').textContent = count;
+        }
+        
+        // Mostrar favoritos salvos
+        function mostrarFavoritos() {
+            const favorites = FavoritesSystem.loadFavorites();
+            if (favorites.length === 0) {
+                showToast('Nenhuma vaga favoritada ainda', 'info');
+            } else {
+                showToast(`Você tem ${favorites.length} vaga(s) favoritada(s): ${favorites.join(', ')}`, 'success', 5000);
+            }
+        }
+        
+        // Limpar favoritos
+        function limparFavoritos() {
+            if (confirm('Deseja realmente limpar todos os favoritos?')) {
+                localStorage.removeItem('empregoMZ_favorites');
+                
+                // Remover classe de todos os botões
+                document.querySelectorAll('.btn-favorite').forEach(btn => {
+                    btn.classList.remove('favorited');
+                });
+                
+                showToast('Todos os favoritos foram removidos', 'success');
+                atualizarContador();
+            }
+        }
+        
+        // Atualizar contador ao carregar
+        setTimeout(atualizarContador, 500);
+        
+        // Atualizar contador quando favoritar
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.btn-favorite')) {
+                setTimeout(atualizarContador, 100);
+            }
+        });
+        
+        // Mensagem de boas-vindas
+        setTimeout(() => {
+            showToast('Bem-vindo à demo! Teste todas as funcionalidades 🎉', 'success', 4000);
+        }, 1000);
+    </script>
+
+</body>
+</html>

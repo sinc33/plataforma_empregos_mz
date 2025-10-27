@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Visual - Cards Melhorados</title>
+    
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- CSS Melhorado -->
+    <link rel="stylesheet" href="assets/css/modern-enhancements.css">
+    <link rel="stylesheet" href="assets/css/vaga-cards-enhanced.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1A1A1A;
+            margin-bottom: 16px;
+            font-size: 36px;
+            font-weight: 800;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #5A5A5A;
+            margin-bottom: 48px;
+            font-size: 18px;
+        }
+        
+        .section {
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #0088CC;
+            display: inline-block;
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+        
+        .info-box {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            margin-bottom: 32px;
+        }
+        
+        .info-box h3 {
+            color: #0088CC;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+        
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .info-box li {
+            padding: 8px 0;
+            color: #5A5A5A;
+        }
+        
+        .info-box li::before {
+            content: '✅ ';
+            margin-right: 8px;
+        }
+        
+        /* Estilos base dos cards (simulando o PHP) */
+        .vaga-card {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .vaga-header {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        
+        .empresa-logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 8px;
+            background: #F5F5F5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid #E0E0E0;
+        }
+        
+        .empresa-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .vaga-content {
+            flex: 1;
+        }
+        
+        .vaga-top {
+            margin-bottom: 12px;
+        }
+        
+        .vaga-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 4px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .vaga-empresa {
+            font-size: 14px;
+            color: #0088CC;
+            font-weight: 600;
+        }
+        
+        .vaga-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding: 12px 0;
+            border-top: 1px solid #E0E0E0;
+            border-bottom: 1px solid #E0E0E0;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #5A5A5A;
+        }
+        
+        .info-item i {
+            width: 16px;
+            height: 16px;
+            color: #0088CC;
+        }
+        
+        .vaga-salario {
+            font-weight: 600;
+            color: #2B7A4B;
+        }
+        
+        .vaga-descricao {
+            font-size: 14px;
+            color: #5A5A5A;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        
+        .vaga-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .data-publicacao {
+            font-size: 13px;
+            color: #999;
+        }
+        
+        .vaga-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .btn-detalhes,
+        .btn-candidatar {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-detalhes {
+            border: 1px solid #0088CC;
+            background: white;
+            color: #0088CC;
+        }
+        
+        .btn-candidatar {
+            border: none;
+            background: #0088CC;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🎨 Cards de Vaga Melhorados</h1>
+        <p class="subtitle">Demonstração visual das melhorias aplicadas aos cards</p>
+        
+        <!-- Info Box -->
+        <div class="info-box">
+            <h3>✨ O que foi melhorado?</h3>
+            <ul>
+                <li>Hover effects suaves com elevação de 8px</li>
+                <li>Gradientes sutis no background</li>
+                <li>Sombras com múltiplas profundidades</li>
+                <li>Badges coloridos para área e modalidade</li>
+                <li>Animações de entrada com fade-in</li>
+                <li>Botão de favoritar (coração) no canto superior direito</li>
+                <li>Efeito de brilho sutil ao passar o mouse</li>
+                <li>Underline animado no título</li>
+            </ul>
+        </div>
+        
+        <!-- Seção 1: Cards Normais -->
+        <div class="section">
+            <h2 class="section-title">📋 Cards Normais</h2>
+            
+            <div class="cards-grid">
+                <!-- Card 1 -->
+                <article class="vaga-card" data-vaga-id="1">
+                    <div class="vaga-header">
+                        <div class="empresa-logo">
+                            <i data-lucide="briefcase" style="width: 32px; height: 32px; color: #0088CC;"></i>
+                        </div>
+                        <div class="vaga-content">
+                            <div class="vaga-top">
+                                <a href="#" class="vaga-title">Desenvolvedor Full Stack PHP</a>
+                                <div class="vaga-empresa">TechSolutions Moçambique</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vaga-info">
+                        <div class="info-item">
+                            <i data-lucide="map-pin"></i>
+                            Maputo
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="monitor"></i>
+                            Remoto
+                        </div>
+                        <div class="info-item vaga-salario">
+                            <i data-lucide="banknote"></i>
+                            45.000,00 MT
+                        </div>
+                    </div>
+                    
+                    <p class="vaga-descricao">
+                        Buscamos desenvolvedor experiente em PHP para projetos web. Conhecimento em Laravel, MySQL e JavaScript é essencial...
+                    </p>
+                    
+                    <div class="vaga-footer">
+                        <span class="data-publicacao">há 2 dias</span>
+                        <div class="vaga-actions">
+                            <a href="#" class="btn-detalhes">Mais detalhes</a>
+                            <a href="#" class="btn-candidatar">Me candidatar</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Card 2 -->
+                <article class="vaga-card" data-vaga-id="2">
+                    <div class="vaga-header">
+                        <div class="empresa-logo">
+                            <i data-lucide="building" style="width: 32px; height: 32px; color: #FF8C00;"></i>
+                        </div>
+                        <div class="vaga-content">
+                            <div class="vaga-top">
+                                <a href="#" class="vaga-title">Gerente de Vendas</a>
+                                <div class="vaga-empresa">VendaMais Ltda</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vaga-info">
+                        <div class="info-item">
+                            <i data-lucide="map-pin"></i>
+                            Beira
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="monitor"></i>
+                            Presencial
+                        </div>
+                        <div class="info-item vaga-salario">
+                            <i data-lucide="banknote"></i>
+                            65.000,00 MT
+                        </div>
+                    </div>
+                    
+                    <p class="vaga-descricao">
+                        Oportunidade para gerente de vendas com experiência no setor comercial. Liderança de equipe e metas agressivas...
+                    </p>
+                    
+                    <div class="vaga-footer">
+                        <span class="data-publicacao">há 5 dias</span>
+                        <div class="vaga-actions">
+                            <a href="#" class="btn-detalhes">Mais detalhes</a>
+                            <a href="#" class="btn-candidatar">Me candidatar</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Card 3 -->
+                <article class="vaga-card" data-vaga-id="3">
+                    <div class="vaga-header">
+                        <div class="empresa-logo">
+                            <i data-lucide="heart-pulse" style="width: 32px; height: 32px; color: #28A745;"></i>
+                        </div>
+                        <div class="vaga-content">
+                            <div class="vaga-top">
+                                <a href="#" class="vaga-title">Designer Gráfico Sênior</a>
+                                <div class="vaga-empresa">CreativeHub Moçambique</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vaga-info">
+                        <div class="info-item">
+                            <i data-lucide="map-pin"></i>
+                            Nampula
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="monitor"></i>
+                            Híbrido
+                        </div>
+                        <div class="info-item vaga-salario">
+                            <i data-lucide="banknote"></i>
+                            38.000,00 MT
+                        </div>
+                    </div>
+                    
+                    <p class="vaga-descricao">
+                        Procuramos designer criativo com portfólio sólido. Photoshop, Illustrator e Figma obrigatórios. Experiência com branding...
+                    </p>
+                    
+                    <div class="vaga-footer">
+                        <span class="data-publicacao">há 1 dia</span>
+                        <div class="vaga-actions">
+                            <a href="#" class="btn-detalhes">Mais detalhes</a>
+                            <a href="#" class="btn-candidatar">Me candidatar</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        
+        <!-- Seção 2: Cards Especiais -->
+        <div class="section">
+            <h2 class="section-title">🔥 Cards Especiais</h2>
+            
+            <div class="cards-grid">
+                <!-- Card Urgente -->
+                <article class="vaga-card urgente" data-vaga-id="4">
+                    <div class="vaga-header">
+                        <div class="empresa-logo">
+                            <i data-lucide="zap" style="width: 32px; height: 32px; color: #FF6B6B;"></i>
+                        </div>
+                        <div class="vaga-content">
+                            <div class="vaga-top">
+                                <a href="#" class="vaga-title">Contador Urgente</a>
+                                <div class="vaga-empresa">Contabilidade 360</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vaga-info">
+                        <div class="info-item">
+                            <i data-lucide="map-pin"></i>
+                            Maputo
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="monitor"></i>
+                            Presencial
+                        </div>
+                        <div class="info-item vaga-salario">
+                            <i data-lucide="banknote"></i>
+                            55.000,00 MT
+                        </div>
+                    </div>
+                    
+                    <p class="vaga-descricao">
+                        URGENTE! Contador certificado para início imediato. Experiência com IRPS e IVA obrigatória. Benefícios inclusos...
+                    </p>
+                    
+                    <div class="vaga-footer">
+                        <span class="data-publicacao">há 3 horas</span>
+                        <div class="vaga-actions">
+                            <a href="#" class="btn-detalhes">Mais detalhes</a>
+                            <a href="#" class="btn-candidatar">Me candidatar</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Card Destaque -->
+                <article class="vaga-card destaque" data-vaga-id="5">
+                    <div class="vaga-header">
+                        <div class="empresa-logo">
+                            <i data-lucide="star" style="width: 32px; height: 32px; color: #FFD700;"></i>
+                        </div>
+                        <div class="vaga-content">
+                            <div class="vaga-top">
+                                <a href="#" class="vaga-title">Engenheiro de Software</a>
+                                <div class="vaga-empresa">BigTech Moçambique</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vaga-info">
+                        <div class="info-item">
+                            <i data-lucide="map-pin"></i>
+                            Maputo
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="monitor"></i>
+                            Remoto
+                        </div>
+                        <div class="info-item vaga-salario">
+                            <i data-lucide="banknote"></i>
+                            95.000,00 MT
+                        </div>
+                    </div>
+                    
+                    <p class="vaga-descricao">
+                        Vaga em destaque! Engenheiro de software para projetos internacionais. Stack moderna, salário competitivo, benefícios completos...
+                    </p>
+                    
+                    <div class="vaga-footer">
+                        <span class="data-publicacao">há 1 hora</span>
+                        <div class="vaga-actions">
+                            <a href="#" class="btn-detalhes">Mais detalhes</a>
+                            <a href="#" class="btn-candidatar">Me candidatar</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Card Novo -->
+                <article class="vaga-card novo" data-vaga-id="6">
+                    <div class="vaga-header">
+                        <div class="empresa-logo">
+                            <i data-lucide="sparkles" style="width: 32px; height: 32px; color: #0088CC;"></i>
+                        </div>
+                        <div class="vaga-content">
+                            <div class="vaga-top">
+                                <a href="#" class="vaga-title">Analista de Marketing Digital</a>
+                                <div class="vaga-empresa">Digital First Agency</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vaga-info">
+                        <div class="info-item">
+                            <i data-lucide="map-pin"></i>
+                            Matola
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="monitor"></i>
+                            Híbrido
+                        </div>
+                        <div class="info-item vaga-salario">
+                            <i data-lucide="banknote"></i>
+                            42.000,00 MT
+                        </div>
+                    </div>
+                    
+                    <p class="vaga-descricao">
+                        NOVA VAGA! Analista para campanhas digitais. Google Ads, Facebook Ads e SEO. Vaga recém-publicada com início imediato...
+                    </p>
+                    
+                    <div class="vaga-footer">
+                        <span class="data-publicacao">há 30 minutos</span>
+                        <div class="vaga-actions">
+                            <a href="#" class="btn-detalhes">Mais detalhes</a>
+                            <a href="#" class="btn-candidatar">Me candidatar</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        
+        <!-- Seção 3: Card Premium -->
+        <div class="section">
+            <h2 class="section-title">👑 Card Premium</h2>
+            
+            <div class="cards-grid">
+                <article class="vaga-card premium" data-vaga-id="7">
+                    <div class="vaga-header">
+                        <div class="empresa-logo">
+                            <i data-lucide="crown" style="width: 32px; height: 32px; color: #FFD700;"></i>
+                        </div>
+                        <div class="vaga-content">
+                            <div class="vaga-top">
+                                <a href="#" class="vaga-title">Diretor de Tecnologia (CTO)</a>
+                                <div class="vaga-empresa">Startup Unicórnio MZ</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vaga-info">
+                        <div class="info-item">
+                            <i data-lucide="map-pin"></i>
+                            Maputo
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="monitor"></i>
+                            Híbrido
+                        </div>
+                        <div class="info-item vaga-salario">
+                            <i data-lucide="banknote"></i>
+                            150.000,00 MT
+                        </div>
+                    </div>
+                    
+                    <p class="vaga-descricao">
+                        Vaga PREMIUM! CTO para startup em crescimento acelerado. Equity, benefícios premium, equipe internacional. Visão estratégica essencial...
+                    </p>
+                    
+                    <div class="vaga-footer">
+                        <span class="data-publicacao">hoje</span>
+                        <div class="vaga-actions">
+                            <a href="#" class="btn-detalhes">Mais detalhes</a>
+                            <a href="#" class="btn-candidatar">Me candidatar</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        
+        <!-- Instruções -->
+        <div class="info-box" style="background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); border: 2px solid #0088CC;">
+            <h3>🎯 Como Testar</h3>
+            <ul>
+                <li>Passe o mouse sobre os cards → Veja a elevação suave</li>
+                <li>Observe o botão de favorito aparecer no canto superior direito</li>
+                <li>Note os badges coloridos na seção de informações</li>
+                <li>Clique no título → Veja o underline animado</li>
+                <li>Cards especiais têm badges no topo (Urgente, Destaque, Novo)</li>
+                <li>Card Premium tem borda dourada e hover mais elevado</li>
+            </ul>
+        </div>
+        
+    </div>
+    
+    <!-- Modern Features JavaScript -->
+    <script src="assets/js/modern-features.js"></script>
+    
+    <script>
+        // Inicializar ícones
+        lucide.createIcons();
+        
+        // Mostrar notificação
+        setTimeout(() => {
+            showToast('Exemplo carregado com sucesso! Passe o mouse nos cards 🎨', 'success', 4000);
+        }, 500);
+    </script>
+
+</body>
+</html>

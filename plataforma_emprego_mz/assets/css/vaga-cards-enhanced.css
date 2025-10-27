@@ -1,0 +1,708 @@
+/* ============================================
+   💳 VAGA CARDS - ENHANCED DESIGN
+   Melhorias visuais mantendo estrutura HTML atual
+   ============================================ */
+
+/* ============================================
+   🎨 CARD BASE - Melhorias Sutis
+   ============================================ */
+.vaga-card {
+    position: relative;
+    background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+    border: 1px solid rgba(0, 136, 204, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+/* Gradiente sutil de overlay */
+.vaga-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        rgba(0, 136, 204, 0) 0%, 
+        rgba(0, 136, 204, 0.6) 50%, 
+        rgba(255, 140, 0, 0.6) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.vaga-card:hover::before {
+    opacity: 1;
+}
+
+/* Efeito de brilho sutil no hover */
+.vaga-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.03) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: translateX(-100%) translateY(-100%) rotate(30deg);
+    transition: transform 0.8s ease;
+    pointer-events: none;
+}
+
+.vaga-card:hover::after {
+    transform: translateX(100%) translateY(100%) rotate(30deg);
+}
+
+/* Hover effect elegante */
+.vaga-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+        0 4px 12px rgba(0, 136, 204, 0.08),
+        0 8px 24px rgba(0, 136, 204, 0.12),
+        0 16px 48px rgba(0, 136, 204, 0.08);
+    border-color: rgba(0, 136, 204, 0.2);
+}
+
+/* ============================================
+   🖼️ LOGO DA EMPRESA - Melhorias
+   ============================================ */
+.empresa-logo {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.vaga-card:hover .empresa-logo {
+    transform: scale(1.05);
+    box-shadow: 
+        0 4px 12px rgba(0, 136, 204, 0.15),
+        0 0 0 3px rgba(0, 136, 204, 0.05);
+}
+
+/* ============================================
+   ✨ ANIMAÇÕES DE ENTRADA
+   ============================================ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Aplicar animação aos cards */
+.vaga-card {
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+}
+
+/* Delays progressivos para múltiplos cards */
+.vaga-card:nth-child(1) { animation-delay: 0.05s; }
+.vaga-card:nth-child(2) { animation-delay: 0.1s; }
+.vaga-card:nth-child(3) { animation-delay: 0.15s; }
+.vaga-card:nth-child(4) { animation-delay: 0.2s; }
+.vaga-card:nth-child(5) { animation-delay: 0.25s; }
+.vaga-card:nth-child(6) { animation-delay: 0.3s; }
+.vaga-card:nth-child(7) { animation-delay: 0.35s; }
+.vaga-card:nth-child(8) { animation-delay: 0.4s; }
+
+/* ============================================
+   🏷️ BADGES COLORIDOS - Área e Modalidade
+   ============================================ */
+
+/* Badge para Área */
+.vaga-info .info-item:first-child,
+.vaga-info .info-item:has([data-lucide="briefcase"]),
+.card-badge {
+    position: relative;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 13px;
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+    color: #0088CC;
+    border: 1px solid rgba(0, 136, 204, 0.15);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.vaga-info .info-item:first-child:hover,
+.card-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 136, 204, 0.15);
+}
+
+/* Badge para Modalidade */
+.vaga-info .info-item:has([data-lucide="monitor"]) {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Presencial - Verde */
+.vaga-info .info-item:has([data-lucide="monitor"]):nth-of-type(2) {
+    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+    color: #2B7A4B;
+    border: 1px solid rgba(43, 122, 75, 0.15);
+}
+
+/* Híbrido - Laranja */
+.vaga-info .info-item:has([data-lucide="monitor"]):nth-of-type(2) {
+    background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+    color: #FF8C00;
+    border: 1px solid rgba(255, 140, 0, 0.15);
+}
+
+/* Remoto - Roxo */
+.vaga-info .info-item:has([data-lucide="monitor"]):nth-of-type(2) {
+    background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+    color: #7B1FA2;
+    border: 1px solid rgba(123, 31, 162, 0.15);
+}
+
+/* Badge de Salário - Destaque */
+.vaga-info .info-item.vaga-salario,
+.card-salary {
+    padding: 8px 16px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+    color: #2B7A4B;
+    font-weight: 700;
+    font-size: 15px;
+    border: 1px solid rgba(43, 122, 75, 0.15);
+    box-shadow: 0 2px 8px rgba(43, 122, 75, 0.08);
+    transition: all 0.3s ease;
+}
+
+.vaga-card:hover .vaga-salario,
+.vaga-card:hover .card-salary {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(43, 122, 75, 0.15);
+}
+
+/* ============================================
+   ❤️ BOTÃO DE FAVORITAR - Canto Superior
+   ============================================ */
+.btn-favorite {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.08),
+        0 4px 16px rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+/* Aparecer no hover do card ou quando favoritado */
+.vaga-card:hover .btn-favorite,
+.btn-favorite.favorited {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.btn-favorite:hover {
+    background: #FFE8E8;
+    box-shadow: 
+        0 4px 12px rgba(255, 107, 107, 0.15),
+        0 8px 24px rgba(255, 107, 107, 0.12);
+    transform: scale(1.1);
+}
+
+.btn-favorite:active {
+    transform: scale(0.95);
+}
+
+/* Ícone do coração */
+.btn-favorite i {
+    width: 22px;
+    height: 22px;
+    color: #999;
+    transition: all 0.3s ease;
+}
+
+.btn-favorite:hover i {
+    color: #FF6B6B;
+}
+
+/* Estado favoritado */
+.btn-favorite.favorited {
+    background: linear-gradient(135deg, #FFE8E8 0%, #FFD6D6 100%);
+    box-shadow: 
+        0 4px 12px rgba(255, 107, 107, 0.2),
+        0 8px 24px rgba(255, 107, 107, 0.15);
+}
+
+.btn-favorite.favorited i {
+    color: #FF6B6B;
+    animation: heartBeat 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes heartBeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    10%, 30% {
+        transform: scale(0.9);
+    }
+    20%, 40%, 60%, 80% {
+        transform: scale(1.2);
+    }
+    50%, 70% {
+        transform: scale(1.15);
+    }
+}
+
+/* Contador de favoritos */
+.btn-favorite.favorited::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 12px;
+    height: 12px;
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF4757 100%);
+    border-radius: 50%;
+    border: 2px solid white;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* ============================================
+   📝 TÍTULO DA VAGA - Melhorias
+   ============================================ */
+.vaga-title,
+.card-title a {
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+/* Underline animado no hover */
+.vaga-title::after,
+.card-title a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #0088CC 0%, #FF8C00 100%);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vaga-title:hover::after,
+.card-title a:hover::after {
+    width: 100%;
+}
+
+/* ============================================
+   🏢 EMPRESA - Destaque
+   ============================================ */
+.vaga-empresa,
+.card-empresa {
+    transition: all 0.3s ease;
+    padding: 4px 12px;
+    margin: -4px -12px;
+    border-radius: 8px;
+}
+
+.vaga-card:hover .vaga-empresa,
+.vaga-card:hover .card-empresa {
+    background: rgba(0, 136, 204, 0.05);
+}
+
+/* ============================================
+   📊 INFO ITEMS - Melhorias
+   ============================================ */
+.vaga-info,
+.card-meta-group {
+    gap: 12px;
+}
+
+.info-item,
+.card-meta {
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
+}
+
+.info-item:hover,
+.card-meta:hover {
+    background: rgba(0, 136, 204, 0.05);
+    transform: translateX(4px);
+}
+
+.info-item i,
+.card-meta i {
+    transition: all 0.3s ease;
+}
+
+.info-item:hover i,
+.card-meta:hover i {
+    transform: scale(1.15);
+}
+
+/* ============================================
+   🎯 BOTÕES DE AÇÃO - Melhorias
+   ============================================ */
+.btn-detalhes,
+.btn-candidatar,
+.btn-ver-mais {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Efeito de onda ao clicar */
+.btn-detalhes::before,
+.btn-candidatar::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-detalhes:active::before,
+.btn-candidatar:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Hover suave nos botões */
+.btn-detalhes:hover {
+    background: rgba(0, 136, 204, 0.05);
+    border-color: #0088CC;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 136, 204, 0.15);
+}
+
+.btn-candidatar:hover {
+    background: linear-gradient(135deg, #0088CC 0%, #006699 100%);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 4px 12px rgba(0, 136, 204, 0.25),
+        0 8px 24px rgba(0, 136, 204, 0.15);
+}
+
+.btn-candidatar:active {
+    transform: translateY(0);
+}
+
+/* ============================================
+   ⏰ DATA DE PUBLICAÇÃO - Badge
+   ============================================ */
+.data-publicacao {
+    padding: 6px 12px;
+    background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+    color: #FF8C00;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid rgba(255, 140, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.data-publicacao:hover {
+    transform: translateX(-4px);
+    box-shadow: 0 2px 8px rgba(255, 140, 0, 0.12);
+}
+
+/* Ícone de relógio antes da data */
+.data-publicacao::before {
+    content: '🕐';
+    font-size: 14px;
+}
+
+/* ============================================
+   🎨 COMPARTILHAR BUTTON - Melhorias
+   ============================================ */
+.btn-compartilhar {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-compartilhar:hover {
+    background: linear-gradient(135deg, #F5F5F5 0%, #E8E8E8 100%);
+    border-color: #0088CC;
+    color: #0088CC;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 136, 204, 0.12);
+}
+
+.btn-compartilhar i {
+    transition: transform 0.3s ease;
+}
+
+.btn-compartilhar:hover i {
+    transform: rotate(15deg) scale(1.1);
+}
+
+/* ============================================
+   💎 CARDS ESPECIAIS - Destacados
+   ============================================ */
+
+/* Card Urgente */
+.vaga-card.urgente,
+.vaga-card[data-urgente="true"] {
+    border-left: 4px solid #FF6B6B;
+    background: linear-gradient(135deg, #FFF5F5 0%, #FFFFFF 100%);
+}
+
+.vaga-card.urgente::before,
+.vaga-card[data-urgente="true"]::before {
+    background: linear-gradient(90deg, 
+        rgba(255, 107, 107, 0.8) 0%, 
+        rgba(255, 107, 107, 0.6) 100%
+    );
+    opacity: 1;
+}
+
+/* Badge urgente no topo */
+.vaga-card.urgente .vaga-header::after,
+.vaga-card[data-urgente="true"] .vaga-header::after {
+    content: '🔥 URGENTE';
+    position: absolute;
+    top: 0;
+    right: 60px;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF4757 100%);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+    animation: pulse 2s infinite;
+}
+
+/* Card Destaque */
+.vaga-card.destaque,
+.vaga-card[data-destaque="true"] {
+    border-left: 4px solid #FFD700;
+    background: linear-gradient(135deg, #FFFEF5 0%, #FFFFFF 100%);
+}
+
+.vaga-card.destaque::before,
+.vaga-card[data-destaque="true"]::before {
+    background: linear-gradient(90deg, 
+        rgba(255, 215, 0, 0.8) 0%, 
+        rgba(255, 193, 7, 0.6) 100%
+    );
+    opacity: 1;
+}
+
+/* Badge estrela para destaque */
+.vaga-card.destaque .vaga-header::after,
+.vaga-card[data-destaque="true"] .vaga-header::after {
+    content: '⭐ DESTAQUE';
+    position: absolute;
+    top: 0;
+    right: 60px;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, #FFD700 0%, #FFC107 100%);
+    color: #7A5C00;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+/* ============================================
+   📱 RESPONSIVIDADE
+   ============================================ */
+@media (max-width: 768px) {
+    .btn-favorite {
+        opacity: 1;
+        transform: scale(1);
+        width: 40px;
+        height: 40px;
+        top: 12px;
+        right: 12px;
+    }
+    
+    .vaga-card:hover {
+        transform: translateY(-4px);
+    }
+    
+    .vaga-info .info-item,
+    .card-badge {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+}
+
+/* ============================================
+   ♿ ACESSIBILIDADE
+   ============================================ */
+.btn-favorite:focus {
+    outline: 3px solid #FF8C00;
+    outline-offset: 2px;
+}
+
+.vaga-title:focus,
+.card-title a:focus {
+    outline: 3px solid #0088CC;
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+/* Reduzir animações para quem prefere */
+@media (prefers-reduced-motion: reduce) {
+    .vaga-card,
+    .btn-favorite,
+    .vaga-title::after,
+    .btn-favorite.favorited i {
+        animation: none;
+        transition-duration: 0.01ms;
+    }
+}
+
+/* ============================================
+   ✨ EFEITOS ESPECIAIS
+   ============================================ */
+
+/* Glowing effect para cards recém-publicados */
+.vaga-card.novo,
+.vaga-card[data-novo="true"] {
+    animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 
+            0 2px 8px rgba(0, 136, 204, 0.08),
+            0 4px 16px rgba(0, 136, 204, 0.12);
+    }
+    50% {
+        box-shadow: 
+            0 4px 16px rgba(0, 136, 204, 0.15),
+            0 8px 32px rgba(0, 136, 204, 0.2),
+            0 0 40px rgba(0, 136, 204, 0.1);
+    }
+}
+
+/* Badge "NOVO" */
+.vaga-card.novo .vaga-header::after,
+.vaga-card[data-novo="true"] .vaga-header::after {
+    content: '✨ NOVO';
+    position: absolute;
+    top: 0;
+    right: 60px;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, #0088CC 0%, #006699 100%);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 12px rgba(0, 136, 204, 0.3);
+}
+
+/* ============================================
+   🎯 LOADING PLACEHOLDER CARDS
+   ============================================ */
+.vaga-card.loading {
+    pointer-events: none;
+    animation: shimmer 2s infinite;
+    background: linear-gradient(
+        90deg,
+        #F0F0F0 25%,
+        #E0E0E0 50%,
+        #F0F0F0 75%
+    );
+    background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* ============================================
+   🏆 VAGAS PREMIUM - Design Especial
+   ============================================ */
+.vaga-card.premium {
+    background: linear-gradient(135deg, 
+        #FFF9E6 0%, 
+        #FFFFFF 50%, 
+        #FFF9E6 100%
+    );
+    border: 2px solid #FFD700;
+    box-shadow: 
+        0 4px 16px rgba(255, 215, 0, 0.15),
+        0 8px 32px rgba(255, 215, 0, 0.1);
+}
+
+.vaga-card.premium::before {
+    background: linear-gradient(90deg, 
+        rgba(255, 215, 0, 0.8) 0%, 
+        rgba(255, 193, 7, 0.6) 50%,
+        rgba(255, 215, 0, 0.8) 100%
+    );
+    opacity: 1;
+    height: 6px;
+}
+
+.vaga-card.premium:hover {
+    transform: translateY(-12px);
+    box-shadow: 
+        0 8px 24px rgba(255, 215, 0, 0.2),
+        0 16px 48px rgba(255, 215, 0, 0.15),
+        0 0 60px rgba(255, 215, 0, 0.1);
+}
