@@ -148,6 +148,9 @@ function traduzirTipoContrato($tipo) {
 
     <!-- Modern Enhancements CSS -->
     <link rel="stylesheet" href="assets/css/modern-enhancements.css">
+    
+    <!-- Vaga Cards Enhanced CSS -->
+    <link rel="stylesheet" href="assets/css/vaga-cards-enhanced.css">
 
     <style>.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>

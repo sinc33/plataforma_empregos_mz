@@ -71,6 +71,9 @@ $cidades = [
 
     <!-- Modern Enhancements CSS -->
     <link rel="stylesheet" href="assets/css/modern-enhancements.css">
+    
+    <!-- Vaga Cards Enhanced CSS -->
+    <link rel="stylesheet" href="assets/css/vaga-cards-enhanced.css">
 
     <style>
         /* ========================================
