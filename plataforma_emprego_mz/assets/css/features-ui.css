@@ -1,0 +1,692 @@
+/* ============================================
+   🎯 FEATURES UI - Sistema de Funcionalidades
+   CSS para Favoritos, Toast e Compartilhar
+   ============================================ */
+
+/* ============================================
+   ❤️ SISTEMA DE FAVORITOS
+   ============================================ */
+
+/* Botão de Favorito */
+.btn-favorite {
+    position: absolute !important;
+    top: 16px !important;
+    right: 16px !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    background: white !important;
+    border: 2px solid transparent !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    z-index: 10 !important;
+    opacity: 0 !important;
+    transform: scale(0.8) !important;
+}
+
+/* Mostrar no hover do card ou quando favoritado */
+.vaga-card:hover .btn-favorite,
+.btn-favorite.favorited {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+}
+
+/* Hover no botão */
+.btn-favorite:hover {
+    background: #FFF5F5 !important;
+    border-color: #FF6B6B !important;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2) !important;
+    transform: scale(1.1) !important;
+}
+
+/* Estado ativo (clicando) */
+.btn-favorite:active {
+    transform: scale(0.95) !important;
+}
+
+/* Ícone coração */
+.btn-favorite svg {
+    width: 22px !important;
+    height: 22px !important;
+    stroke: #999 !important;
+    fill: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-favorite:hover svg {
+    stroke: #FF6B6B !important;
+}
+
+/* Estado favoritado */
+.btn-favorite.favorited {
+    background: linear-gradient(135deg, #FFE8E8 0%, #FFD6D6 100%) !important;
+    border-color: #FF6B6B !important;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.25) !important;
+}
+
+.btn-favorite.favorited svg {
+    stroke: #FF6B6B !important;
+    fill: #FF6B6B !important;
+}
+
+/* Animação de coração batendo */
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    10%, 30% { transform: scale(0.9); }
+    20%, 40%, 60%, 80% { transform: scale(1.2); }
+    50%, 70% { transform: scale(1.15); }
+}
+
+.btn-favorite.favorited svg {
+    animation: heartBeat 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Badge contador */
+.favorites-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF4757 100%);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+    animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Mobile: sempre visível */
+@media (max-width: 768px) {
+    .btn-favorite {
+        opacity: 1 !important;
+        transform: scale(1) !important;
+        width: 40px !important;
+        height: 40px !important;
+        top: 12px !important;
+        right: 12px !important;
+    }
+}
+
+/* ============================================
+   🔔 NOTIFICAÇÕES TOAST
+   ============================================ */
+
+/* Container das notificações */
+.toast-container {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 400px;
+    pointer-events: none;
+}
+
+/* Toast individual */
+.toast {
+    background: white;
+    border-radius: 12px;
+    padding: 16px 20px;
+    min-width: 320px;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.08),
+        0 8px 24px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+    pointer-events: all;
+    animation: slideInRight 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Saída */
+.toast.hiding {
+    animation: slideOutRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideOutRight {
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
+
+/* Borda lateral colorida */
+.toast::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+}
+
+/* Tipos de toast */
+.toast.success::before {
+    background: linear-gradient(180deg, #28A745 0%, #20873A 100%);
+}
+
+.toast.error::before {
+    background: linear-gradient(180deg, #DC3545 0%, #C82333 100%);
+}
+
+.toast.info::before {
+    background: linear-gradient(180deg, #0088CC 0%, #006699 100%);
+}
+
+.toast.warning::before {
+    background: linear-gradient(180deg, #FF8C00 0%, #E67E00 100%);
+}
+
+/* Ícone do toast */
+.toast-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast.success .toast-icon {
+    background: rgba(40, 167, 69, 0.1);
+}
+
+.toast.success .toast-icon svg {
+    stroke: #28A745;
+}
+
+.toast.error .toast-icon {
+    background: rgba(220, 53, 69, 0.1);
+}
+
+.toast.error .toast-icon svg {
+    stroke: #DC3545;
+}
+
+.toast.info .toast-icon {
+    background: rgba(0, 136, 204, 0.1);
+}
+
+.toast.info .toast-icon svg {
+    stroke: #0088CC;
+}
+
+.toast.warning .toast-icon {
+    background: rgba(255, 140, 0, 0.1);
+}
+
+.toast.warning .toast-icon svg {
+    stroke: #FF8C00;
+}
+
+/* Conteúdo */
+.toast-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.toast-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: #1A1A1A;
+    margin-bottom: 4px;
+}
+
+.toast-message {
+    font-size: 13px;
+    color: #5A5A5A;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+/* Botão fechar */
+.toast-close {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    transition: all 0.2s;
+}
+
+.toast-close:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #333;
+}
+
+.toast-close svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Barra de progresso */
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: currentColor;
+    opacity: 0.3;
+    border-radius: 0 0 12px 0;
+}
+
+.toast.success .toast-progress {
+    color: #28A745;
+}
+
+.toast.error .toast-progress {
+    color: #DC3545;
+}
+
+.toast.info .toast-progress {
+    color: #0088CC;
+}
+
+.toast.warning .toast-progress {
+    color: #FF8C00;
+}
+
+/* Animação da barra */
+.toast-progress.animating {
+    animation: progressBar 3s linear forwards;
+}
+
+@keyframes progressBar {
+    from { width: 100%; }
+    to { width: 0%; }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .toast-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .toast {
+        min-width: auto;
+        width: 100%;
+    }
+}
+
+/* ============================================
+   📱 MENU DE COMPARTILHAR
+   ============================================ */
+
+/* Container do menu */
+.share-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.08),
+        0 8px 24px rgba(0, 0, 0, 0.12);
+    padding: 8px;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Menu aberto */
+.share-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+/* Seta do menu */
+.share-menu::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 20px;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+    transform: rotate(45deg);
+}
+
+/* Itens do menu */
+.share-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: #1A1A1A;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.share-menu-item:hover {
+    background: rgba(0, 0, 0, 0.04);
+    transform: translateX(4px);
+}
+
+.share-menu-item:active {
+    transform: translateX(2px);
+}
+
+/* Ícones coloridos por rede */
+.share-menu-item svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.share-menu-item.whatsapp svg {
+    stroke: #25D366;
+}
+
+.share-menu-item.linkedin svg {
+    stroke: #0077B5;
+}
+
+.share-menu-item.facebook svg {
+    stroke: #1877F2;
+}
+
+.share-menu-item.twitter svg {
+    stroke: #1DA1F2;
+}
+
+.share-menu-item.email svg {
+    stroke: #EA4335;
+}
+
+.share-menu-item.copy svg {
+    stroke: #5A5A5A;
+}
+
+/* Texto do item */
+.share-menu-text {
+    flex: 1;
+}
+
+/* Divider */
+.share-menu-divider {
+    height: 1px;
+    background: rgba(0, 0, 0, 0.08);
+    margin: 4px 0;
+}
+
+/* Badge "copiado" */
+.share-menu-item.copied::after {
+    content: '✓';
+    color: #28A745;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+/* Animação de sucesso ao copiar */
+@keyframes successPulse {
+    0%, 100% {
+        background: rgba(40, 167, 69, 0);
+    }
+    50% {
+        background: rgba(40, 167, 69, 0.1);
+    }
+}
+
+.share-menu-item.copied {
+    animation: successPulse 0.6s ease;
+}
+
+/* Botão compartilhar melhorado */
+.btn-compartilhar {
+    position: relative;
+}
+
+.btn-compartilhar.active {
+    background: rgba(0, 136, 204, 0.08);
+    color: #0088CC;
+}
+
+.btn-compartilhar svg {
+    transition: transform 0.3s ease;
+}
+
+.btn-compartilhar.active svg {
+    transform: rotate(180deg);
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .share-menu {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        border-radius: 16px 16px 0 0;
+        min-width: auto;
+        max-height: 80vh;
+        overflow-y: auto;
+        transform: translateY(100%);
+    }
+    
+    .share-menu.active {
+        transform: translateY(0);
+    }
+    
+    .share-menu::before {
+        display: none;
+    }
+    
+    /* Handle para arrastar */
+    .share-menu::after {
+        content: '';
+        position: sticky;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 4px;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 2px;
+        display: block;
+        margin-bottom: 8px;
+    }
+}
+
+/* ============================================
+   ✨ EFEITOS VISUAIS ADICIONAIS
+   ============================================ */
+
+/* Pulse suave para favoritos */
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(255, 107, 107, 0);
+    }
+}
+
+.btn-favorite.favorited {
+    animation: pulse 2s infinite;
+}
+
+/* Shimmer effect no loading */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.loading-shimmer {
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.04) 25%,
+        rgba(0, 0, 0, 0.08) 50%,
+        rgba(0, 0, 0, 0.04) 75%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* ============================================
+   ♿ ACESSIBILIDADE
+   ============================================ */
+
+/* Foco visível */
+.btn-favorite:focus,
+.toast-close:focus,
+.share-menu-item:focus {
+    outline: 3px solid #FF8C00;
+    outline-offset: 2px;
+}
+
+/* Reduzir animações */
+@media (prefers-reduced-motion: reduce) {
+    .btn-favorite,
+    .toast,
+    .share-menu,
+    .btn-favorite svg,
+    .toast-progress {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Alto contraste */
+@media (prefers-contrast: high) {
+    .toast,
+    .share-menu,
+    .btn-favorite {
+        border: 2px solid currentColor;
+    }
+}
+
+/* ============================================
+   🎯 ESTADOS DE CARREGAMENTO
+   ============================================ */
+
+/* Loading spinner para ações assíncronas */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+/* Botão em loading */
+.btn-favorite.loading,
+.share-menu-item.loading {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* ============================================
+   🌙 MODO ESCURO (Opcional)
+   ============================================ */
+
+body.dark-mode .toast {
+    background: #2A2A2A;
+    color: #E0E0E0;
+}
+
+body.dark-mode .toast-title {
+    color: #E0E0E0;
+}
+
+body.dark-mode .toast-message {
+    color: #999;
+}
+
+body.dark-mode .share-menu {
+    background: #2A2A2A;
+    border-color: #3A3A3A;
+}
+
+body.dark-mode .share-menu::before {
+    background: #2A2A2A;
+    border-color: #3A3A3A;
+}
+
+body.dark-mode .share-menu-item {
+    color: #E0E0E0;
+}
+
+body.dark-mode .share-menu-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .btn-favorite {
+    background: #2A2A2A;
+    border-color: #3A3A3A;
+}
+
+body.dark-mode .btn-favorite svg {
+    stroke: #999;
+}
