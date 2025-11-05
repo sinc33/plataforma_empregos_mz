@@ -1,0 +1,437 @@
+/* ============================================================================
+   🎨 PLATAFORMA DE EMPREGOS MZ - DESIGN SYSTEM
+   Nova Identidade Visual Profissional e Corporativa
+   Paleta: Oxford Blue (#14213d) + Orange Web (#fca311)
+============================================================================ */
+
+/* ==========================================
+   🎨 VARIÁVEIS CSS - NOVA PALETA PROFISSIONAL
+========================================== */
+:root {
+    /* 🔵 CORES PRINCIPAIS - Oxford Blue */
+    --cor-primaria: #14213d;              /* Oxford Blue - Confiança e Estabilidade */
+    --cor-primaria-escura: #0f1a2e;       /* Oxford Blue Dark */
+    --cor-primaria-clara: #1e2c47;        /* Oxford Blue Light */
+    --cor-primaria-alpha: rgba(20, 33, 61, 0.1);
+    
+    /* 🟠 CORES SECUNDÁRIAS - Orange Web */
+    --cor-secundaria: #fca311;            /* Orange Web - Energia e Ação */
+    --cor-secundaria-hover: #e3940f;      /* Orange Hover */
+    --cor-secundaria-clara: #fdb541;      /* Orange Light */
+    --cor-secundaria-muito-clara: #fec871; /* Orange Very Light */
+    --cor-secundaria-alpha: rgba(252, 163, 17, 0.1);
+    
+    /* 🌫️ HIERARQUIA VISUAL - Soft Gray System */
+    --cor-fundo: #f8fafc;                 /* Soft Gray - FUNDO PRINCIPAL */
+    --cor-cards: #ffffff;                 /* White - Cards/Containers */
+    --cor-acento: #f1f5ff;                /* Light Blue - Detalhes e acentos */
+    --cor-texto: #000000;                 /* Black - Textos principais */
+    --cor-texto-claro: #666666;           /* Gray - Textos secundários */
+    --cor-borda: #e5e7eb;                 /* Light Border */
+    
+    /* 🎯 ESTADOS */
+    --cor-sucesso: #10B981;               /* Success - Verde */
+    --cor-erro: #EF4444;                  /* Error - Vermelho */
+    --cor-aviso: #fca311;                 /* Warning - Orange */
+    --cor-info: #14213d;                  /* Info - Oxford Blue */
+    
+    /* 📊 ESCALA DE GRAYS - Platinum */
+    --gray-900: #000000;                  /* Black */
+    --gray-800: #333333;                  /* Dark Gray */
+    --gray-700: #666666;                  /* Medium Dark Gray */
+    --gray-600: #999999;                  /* Medium Gray */
+    --gray-500: #8a8a8a;                  /* Gray */
+    --gray-400: #b8b8b8;                  /* Light Gray */
+    --gray-300: #e5e5e5;                  /* Platinum */
+    --gray-200: #ebebeb;                  /* Very Light Gray */
+    --gray-100: #f5f5f5;                  /* Ultra Light Gray */
+    --gray-50: #f8fafc;                   /* Soft Gray - alinhado com fundo */
+    --gray-100: #f1f5f9;
+    --white: #ffffff;                     /* Pure White */
+    
+    /* 🎨 ALIASES PARA COMPATIBILIDADE */
+    --primary: var(--cor-primaria);
+    --primary-dark: var(--cor-primaria-escura);
+    --primary-light: var(--cor-primaria-clara);
+    --secondary: var(--cor-secundaria);
+    --secondary-dark: var(--cor-secundaria-hover);
+    --secondary-light: var(--cor-secundaria-clara);
+    --success: var(--cor-sucesso);
+    --error: var(--cor-erro);
+    --warning: var(--cor-aviso);
+    --info: var(--cor-info);
+    --background: var(--cor-fundo);
+    --card-bg: var(--cor-cards);
+    
+    /* 📏 TIPOGRAFIA */
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-size-xs: 12px;
+    --font-size-sm: 14px;
+    --font-size-base: 16px;
+    --font-size-lg: 18px;
+    --font-size-xl: 20px;
+    --font-size-2xl: 24px;
+    --font-size-3xl: 30px;
+    --font-size-4xl: 36px;
+    --font-size-5xl: 48px;
+    
+    /* 📐 ESPAÇAMENTO */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+    
+    /* 🔲 BORDER RADIUS */
+    --radius-sm: 4px;
+    --radius: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+    --radius-2xl: 16px;
+    --radius-full: 9999px;
+    
+    /* 🌑 SHADOWS */
+    --shadow-sm: 0 1px 2px 0 rgba(20, 33, 61, 0.05);
+    --shadow: 0 1px 3px 0 rgba(20, 33, 61, 0.1), 0 1px 2px 0 rgba(20, 33, 61, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(20, 33, 61, 0.1), 0 2px 4px -1px rgba(20, 33, 61, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(20, 33, 61, 0.1), 0 4px 6px -2px rgba(20, 33, 61, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(20, 33, 61, 0.1), 0 10px 10px -5px rgba(20, 33, 61, 0.04);
+    --shadow-2xl: 0 25px 50px -12px rgba(20, 33, 61, 0.25);
+    
+    /* ⏱️ TRANSIÇÕES */
+    --transition: all 0.2s ease;
+    --transition-slow: all 0.3s ease;
+    --transition-fast: all 0.15s ease;
+}
+
+/* ==========================================
+   🎯 COMPONENTES - BOTÕES
+========================================== */
+
+/* Botão Primário - Oxford Blue */
+.btn-primary,
+.btn-primario {
+    background: var(--cor-primaria);
+    color: var(--white);
+    border: none;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.btn-primary:hover,
+.btn-primario:hover {
+    background: var(--cor-primaria-escura);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Botão Secundário - Orange */
+.btn-secondary,
+.btn-secundario {
+    background: var(--cor-secundaria);
+    color: var(--white);
+    border: none;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.btn-secondary:hover,
+.btn-secundario:hover {
+    background: var(--cor-secundaria-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Botão Outline */
+.btn-outline {
+    background: transparent;
+    color: var(--cor-primaria);
+    border: 2px solid var(--cor-primaria);
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.btn-outline:hover {
+    background: var(--cor-primaria);
+    color: var(--white);
+}
+
+/* Botão Success */
+.btn-success,
+.btn-sucesso {
+    background: var(--cor-sucesso);
+    color: var(--white);
+    border: none;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-success:hover,
+.btn-sucesso:hover {
+    background: #0d9668;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Botão Danger */
+.btn-danger,
+.btn-erro {
+    background: var(--cor-erro);
+    color: var(--white);
+    border: none;
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-danger:hover,
+.btn-erro:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+/* ==========================================
+   🎯 COMPONENTES - CARDS
+========================================== */
+.card {
+    background: var(--cor-cards);        /* White - destaque sobre fundo */
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.card-header {
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--cor-borda);
+    margin-bottom: var(--space-4);
+}
+
+.card-title {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--cor-primaria);
+    margin: 0;
+}
+
+.card-body {
+    color: var(--cor-texto-claro);
+}
+
+/* ==========================================
+   🎯 COMPONENTES - BADGES/TAGS
+========================================== */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+}
+
+.badge-primary {
+    background: var(--cor-primaria-alpha);
+    color: var(--cor-primaria);
+}
+
+.badge-secondary {
+    background: var(--cor-secundaria-alpha);
+    color: var(--cor-secundaria-hover);
+}
+
+.badge-success {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--cor-sucesso);
+}
+
+.badge-error {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--cor-erro);
+}
+
+.badge-warning {
+    background: var(--cor-secundaria-alpha);
+    color: var(--cor-secundaria-hover);
+}
+
+/* ==========================================
+   🎯 COMPONENTES - FORMULÁRIOS
+========================================== */
+.form-group {
+    margin-bottom: var(--space-4);
+}
+
+.form-label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--cor-texto);
+    margin-bottom: var(--space-2);
+}
+
+.form-control,
+.form-input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--radius);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-family);
+    color: var(--cor-texto);
+    transition: var(--transition);
+    background: var(--white);
+}
+
+.form-control:focus,
+.form-input:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px var(--cor-primaria-alpha);
+}
+
+.form-control::placeholder,
+.form-input::placeholder {
+    color: var(--cor-texto-claro);
+}
+
+.form-select {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--radius);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-family);
+    color: var(--cor-texto);
+    background: var(--white);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px var(--cor-primaria-alpha);
+}
+
+/* ==========================================
+   🎯 COMPONENTES - ALERTS
+========================================== */
+.alert {
+    padding: var(--space-4);
+    border-radius: var(--radius);
+    border: 1px solid;
+    margin-bottom: var(--space-4);
+}
+
+.alert-success {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: var(--cor-sucesso);
+    color: #065f46;
+}
+
+.alert-error {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: var(--cor-erro);
+    color: #991b1b;
+}
+
+.alert-warning {
+    background: var(--cor-secundaria-alpha);
+    border-color: var(--cor-secundaria);
+    color: #92400e;
+}
+
+.alert-info {
+    background: var(--cor-primaria-alpha);
+    border-color: var(--cor-primaria);
+    color: var(--cor-primaria-escura);
+}
+
+/* ==========================================
+   🎯 UTILITÁRIOS
+========================================== */
+.text-primary { color: var(--cor-primaria) !important; }
+.text-secondary { color: var(--cor-secundaria) !important; }
+.text-success { color: var(--cor-sucesso) !important; }
+.text-error { color: var(--cor-erro) !important; }
+.text-muted { color: var(--cor-texto-claro) !important; }
+
+.bg-primary { background: var(--cor-primaria) !important; }
+.bg-secondary { background: var(--cor-secundaria) !important; }
+.bg-light { background: var(--gray-50) !important; }
+.bg-white { background: var(--white) !important; }
+
+.border-primary { border-color: var(--cor-primaria) !important; }
+.border-secondary { border-color: var(--cor-secundaria) !important; }
+.border-light { border-color: var(--cor-borda) !important; }
+
+/* ==========================================
+   🎯 RESET BÁSICO
+========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--cor-texto);
+    background: var(--cor-fundo);        /* Soft Gray */
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: var(--cor-primaria);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--cor-secundaria);
+}
+

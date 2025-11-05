@@ -1,0 +1,363 @@
+/**
+ * ==========================================
+ * 🎨 ESTILOS DO MODAL DE CONFIRMAÇÃO GLOBAL
+ * ==========================================
+ * Suporta 4 tipos: danger, warning, info, bulk
+ */
+
+/* ==========================================
+   🎭 OVERLAY E CONTAINER
+========================================== */
+.modal-confirm-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(4px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 16px;
+}
+
+.modal-confirm-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-confirm-container {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    max-width: 480px;
+    width: 100%;
+    transform: scale(0.95) translateY(-20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.modal-confirm-overlay.active .modal-confirm-container {
+    transform: scale(1) translateY(0);
+}
+
+/* ==========================================
+   📌 HEADER
+========================================== */
+.modal-confirm-header {
+    padding: 24px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.modal-confirm-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.modal-confirm-icon i {
+    width: 28px;
+    height: 28px;
+}
+
+.modal-confirm-title-wrapper {
+    flex: 1;
+    min-width: 0;
+}
+
+.modal-confirm-title-wrapper h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #14213d;
+    margin: 0 0 4px 0;
+}
+
+.modal-confirm-title-wrapper p {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0;
+}
+
+/* ==========================================
+   📝 BODY
+========================================== */
+.modal-confirm-body {
+    padding: 24px;
+}
+
+.modal-confirm-body > p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #64748b;
+    margin: 0 0 16px 0;
+}
+
+.modal-confirm-highlight {
+    background: #f1f5ff;
+    border-left: 3px solid #14213d;
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 16px;
+}
+
+.modal-confirm-highlight strong {
+    color: #14213d;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.modal-confirm-highlight p {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0;
+}
+
+/* ==========================================
+   🔘 FOOTER E BOTÕES
+========================================== */
+.modal-confirm-footer {
+    padding: 24px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    background: #f8fafc;
+}
+
+.modal-confirm-btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal-confirm-btn i {
+    width: 18px;
+    height: 18px;
+}
+
+.modal-confirm-btn-cancel {
+    background: transparent;
+    color: #64748b;
+    border: 2px solid #e2e8f0;
+}
+
+.modal-confirm-btn-cancel:hover {
+    background: #f1f5ff;
+    color: #14213d;
+    border-color: #14213d;
+}
+
+.modal-confirm-btn-confirm {
+    color: white;
+    border: 2px solid transparent;
+}
+
+.modal-confirm-btn-confirm:hover {
+    transform: translateY(-1px);
+}
+
+.modal-confirm-btn-confirm:active {
+    transform: translateY(0);
+}
+
+/* ==========================================
+   🎨 TIPO: DANGER (Vermelho - Exclusões)
+========================================== */
+.modal-confirm-danger .modal-confirm-header {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(239, 68, 68, 0.02));
+}
+
+.modal-confirm-danger .modal-confirm-icon {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.modal-confirm-danger .modal-confirm-icon i {
+    color: #EF4444;
+}
+
+.modal-confirm-danger .modal-confirm-btn-confirm {
+    background: #EF4444;
+    border-color: #EF4444;
+}
+
+.modal-confirm-danger .modal-confirm-btn-confirm:hover {
+    background: #dc2626;
+    border-color: #dc2626;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* ==========================================
+   ⚠️ TIPO: WARNING (Laranja - Desativar/Ativar)
+========================================== */
+.modal-confirm-warning .modal-confirm-header {
+    background: linear-gradient(135deg, rgba(252, 163, 17, 0.05), rgba(252, 163, 17, 0.02));
+}
+
+.modal-confirm-warning .modal-confirm-icon {
+    background: rgba(252, 163, 17, 0.1);
+}
+
+.modal-confirm-warning .modal-confirm-icon i {
+    color: #fca311;
+}
+
+.modal-confirm-warning .modal-confirm-btn-confirm {
+    background: #fca311;
+    border-color: #fca311;
+}
+
+.modal-confirm-warning .modal-confirm-btn-confirm:hover {
+    background: #e3940f;
+    border-color: #e3940f;
+    box-shadow: 0 4px 12px rgba(252, 163, 17, 0.3);
+}
+
+.modal-confirm-warning .modal-confirm-highlight {
+    background: rgba(252, 163, 17, 0.05);
+    border-left-color: #fca311;
+}
+
+/* ==========================================
+   ℹ️ TIPO: INFO (Azul - Informações)
+========================================== */
+.modal-confirm-info .modal-confirm-header {
+    background: linear-gradient(135deg, rgba(20, 33, 61, 0.05), rgba(20, 33, 61, 0.02));
+}
+
+.modal-confirm-info .modal-confirm-icon {
+    background: rgba(20, 33, 61, 0.1);
+}
+
+.modal-confirm-info .modal-confirm-icon i {
+    color: #14213d;
+}
+
+.modal-confirm-info .modal-confirm-btn-confirm {
+    background: #14213d;
+    border-color: #14213d;
+}
+
+.modal-confirm-info .modal-confirm-btn-confirm:hover {
+    background: #0f1a2e;
+    border-color: #0f1a2e;
+    box-shadow: 0 4px 12px rgba(20, 33, 61, 0.3);
+}
+
+/* ==========================================
+   📦 TIPO: BULK (Roxo - Ações em Massa)
+========================================== */
+.modal-confirm-bulk .modal-confirm-header {
+    background: linear-gradient(135deg, rgba(111, 66, 193, 0.05), rgba(111, 66, 193, 0.02));
+}
+
+.modal-confirm-bulk .modal-confirm-icon {
+    background: rgba(111, 66, 193, 0.1);
+}
+
+.modal-confirm-bulk .modal-confirm-icon i {
+    color: #6F42C1;
+}
+
+.modal-confirm-bulk .modal-confirm-btn-confirm {
+    background: #6F42C1;
+    border-color: #6F42C1;
+}
+
+.modal-confirm-bulk .modal-confirm-btn-confirm:hover {
+    background: #5a32a3;
+    border-color: #5a32a3;
+    box-shadow: 0 4px 12px rgba(111, 66, 193, 0.3);
+}
+
+.modal-confirm-bulk .modal-confirm-highlight {
+    background: rgba(111, 66, 193, 0.05);
+    border-left-color: #6F42C1;
+}
+
+/* ==========================================
+   📱 RESPONSIVE
+========================================== */
+@media (max-width: 768px) {
+    .modal-confirm-container {
+        max-width: 100%;
+        border-radius: 12px;
+    }
+
+    .modal-confirm-header {
+        padding: 20px;
+    }
+
+    .modal-confirm-icon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .modal-confirm-icon i {
+        width: 24px;
+        height: 24px;
+    }
+
+    .modal-confirm-title-wrapper h3 {
+        font-size: 18px;
+    }
+
+    .modal-confirm-body {
+        padding: 20px;
+    }
+
+    .modal-confirm-footer {
+        padding: 20px;
+        flex-direction: column-reverse;
+    }
+
+    .modal-confirm-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ==========================================
+   ✨ ANIMAÇÕES
+========================================== */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-confirm-overlay.active .modal-confirm-container {
+    animation: modalFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+
+
+
+
+
